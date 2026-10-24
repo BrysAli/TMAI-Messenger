@@ -206,12 +206,20 @@ a{color:inherit}
 .apr-ok svg{width:16px;height:16px}
 
 /* ---------- scene switch ---------- */
-.switch{position:absolute;right:calc(80px * var(--s));bottom:calc(80px * var(--s));display:flex;gap:4px;padding:6px;border-radius:999px;background:rgba(14,10,26,.6);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);z-index:3}
-.switch button{position:relative;overflow:hidden;height:36px;padding:0 16px;border:0;border-radius:999px;background:transparent;color:rgba(255,255,255,.72);
-  font:500 14px/1 var(--font);cursor:pointer;transition:color .2s ease, background-color .2s ease}
-.switch button[aria-pressed="true"]{color:#fff;background:rgba(255,255,255,.14)}
-@media (hover:hover) and (pointer:fine){ .switch button:hover{color:#fff} }
+/* Figma «Landing / Scene Switch» (939:1197): the same pill as the scene tabs below, dark glass on the photo.
+   Box 4px padding, 4px gap, 1px black 5% stroke; glass = ink 20% at 62% + blur 18 (CSS 9px).
+   Tab 36px, 16px sides, 14/20 medium #fafafa; idle at 70%, active filled with the accent. Same at every width. */
+.switch{position:absolute;right:calc(80px * var(--s));bottom:calc(80px * var(--s));display:flex;gap:4px;padding:4px;border-radius:999px;
+  background:rgba(0,0,0,.02);border:1px solid rgba(0,0,0,.05);isolation:isolate;z-index:3}
+.switch::before{content:"";position:absolute;inset:-1px;z-index:-1;border-radius:inherit;background:rgba(10,10,10,.2);opacity:.62;
+  backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+.switch button{position:relative;display:inline-flex;align-items:center;height:36px;padding:0 16px;border:0;border-radius:999px;background:transparent;
+  color:rgba(250,250,250,.7);font:500 14px/20px var(--font);white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:color .3s ease, background-color .3s ease, transform var(--dur-press) var(--ease-out)}
+.switch button::after{content:"";position:absolute;inset:-4px -2px}   /* 44px hit area on touch */
+.switch button:active{transform:scale(.96)}
+.switch button[aria-pressed="true"]{color:#fafafa;background:var(--accent)}
+@media (hover:hover) and (pointer:fine){ .switch button:not([aria-pressed="true"]):hover{color:#fafafa} }
 
 /* ---------- agentic messenger: the phone pins in the middle, callouts tell what happens (storyboard, Figma Section 3) ---------- */
 .ag{position:relative;margin-inline:calc(50% - 50vw)}
@@ -363,7 +371,6 @@ a{color:inherit}
   .bub.wide{width:100%}
   .w-p{padding:16px;gap:20px}
   .switch{margin-top:-8px}
-  .switch button{height:40px;padding:0 16px}
   .ag-intro{padding:64px 9px 0}
 }
 @media (prefers-reduced-motion: reduce){
