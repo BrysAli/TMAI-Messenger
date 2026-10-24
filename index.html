@@ -336,8 +336,8 @@ a{color:inherit}
 .ag:not(.m) .ag-mtabs{display:flex;position:absolute;left:50%;top:min(calc(50% + 42px + 399px * var(--k, 1)), calc(100% - 43px));transform:translate(-50%, -50%);z-index:3;
   align-items:center;gap:2px;padding:4px;border-radius:999px;background:rgba(0,0,0,.02);border:1px solid rgba(0,0,0,.05);
   transition:background-color var(--dur-theme) var(--ease-out), border-color var(--dur-theme) var(--ease-out)}
-.ag:not(.m) .ag-mtabs button{height:44px;padding:0 16px;font-weight:400;color:rgba(119,121,116,.72)}
-.ag:not(.m) .ag-mtabs button::after{inset:0}
+.ag:not(.m) .ag-mtabs button{height:36px;padding:0 16px;font-weight:500;color:rgba(119,121,116,.72)}   /* 36 like the hero switch */
+.ag:not(.m) .ag-mtabs button::after{inset:-4px 0}
 .ag:not(.m) .ag-mtabs .lb{max-width:none;margin-left:8px;opacity:1}
 .ag:not(.m) .ag-mtabs button[aria-pressed="true"]{padding:0 16px;font-weight:500;color:#fafafa;background:var(--accent)}
 .ag:not(.m) .ag-mtabs button[aria-pressed="true"] .lb{margin-left:8px}
@@ -376,7 +376,7 @@ a{color:inherit}
   .copy p{font-size:18px;line-height:1.2;max-width:480px}
   .dl{margin-top:32px;height:56px;font-size:17px}
   .chatcol{position:static;width:100%;max-width:440px;height:560px;margin-inline:auto;transform:none}
-  .switch{position:static;align-self:center}
+  .switch{position:relative;right:auto;bottom:auto;align-self:center}   /* relative, not static: the glass ::before must stay inside the pill */
   .ag-intro{padding-top:96px}
 }
 @media (max-width:600px){
