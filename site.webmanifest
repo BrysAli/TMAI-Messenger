@@ -1,0 +1,11 @@
+{
+  "name": "TMAI",
+  "short_name": "TMAI",
+  "icons": [
+    { "src": "/images/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/images/favicon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#7C3AED",
+  "background_color": "#FFFFFF",
+  "display": "browser"
+}
