@@ -470,13 +470,16 @@ a{color:inherit}
 .ag-tc .cat{margin:0;font-size:18px;line-height:28px;color:var(--p-muted)}
 .ag-tc h3{margin:16px 0 0;font-weight:600;font-size:44px;line-height:46px;letter-spacing:-.04em;color:var(--p-fg)}
 .ag-tc .desc{margin:16px 0 0;font-size:18px;line-height:28px;color:var(--p-muted)}
-.ag-tc .conn{margin-top:40px;padding-top:24px;border-top:1px solid #e5e5e5}
+/* «Connected to your organization»: a white plate under the mode copy (Figma 1371:49918) */
+.ag-tc .conn{margin-top:40px;padding:32px;border-radius:24px;background:#fff;display:flex;flex-direction:column;gap:24px}
 .ag-tc .conn b{display:block;font-weight:500;font-size:12px;line-height:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--p-muted)}
-.ag-tc .conn ul{margin:16px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:178px 1fr;row-gap:8px}
-.ag-tc .conn li{position:relative;padding-left:15px;font-size:15px;line-height:22px;color:#404040}
-.ag-tc .conn li::before{content:"";position:absolute;left:3px;top:9px;width:4px;height:4px;border-radius:50%;background:var(--accent);opacity:.6}
-.ag-tc .own{display:flex;align-items:center;gap:8px;margin:28px 0 0;font-weight:600;font-size:15px;line-height:22px;color:var(--p-fg)}
+.ag-tc .conn ul{margin:16px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px}
+.ag-tc .conn li{display:flex;align-items:center;gap:10px;font-size:15px;line-height:22px;color:#404040}
+.ag-tc .conn li::before{content:"";flex:none;width:5px;height:5px;border-radius:1px;background:rgba(124,58,237,.4)}
+.ag-tc .own{display:flex;align-items:center;gap:8px;margin:0;font-weight:600;font-size:15px;line-height:22px;color:var(--p-fg)}
 .ag-tc .own svg{width:16px;height:16px}
+/* the mode column (copy + plate) is centred on the phone, as in the storyboard */
+.ag-tc.mid{top:414px;translate:0 -50%}
 
 /* per-story copy on phones: under the block title, one cell for all stories so switching never moves the phone */
 .ag-tcopy{display:none}
