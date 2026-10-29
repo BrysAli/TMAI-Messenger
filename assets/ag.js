@@ -24,7 +24,7 @@ const copyDef = intro.querySelector('.ag-copy.def');
 const tcopy = intro.querySelector('.ag-tcopy');
 const track = document.createElement('div'); track.className='ag-track';
 track.innerHTML = `<div class="ag-pin"><div class="ag-bg"></div><div class="ag-stage">
-  <img class="ag-grid" src="/images/ag/grid.svg" alt=""><div class="ag-phone"></div>
+  <img class="ag-grid" src="/images/ag/grid.svg" alt=""><img class="ag-grid ag-grid-white" src="/images/ag/grid-white.svg" alt=""><div class="ag-phone"></div>
   <svg class="ag-lines" viewBox="0 0 1440 900" aria-hidden="true"><defs></defs></svg><div class="ag-co-layer"></div>
   </div><p class="ag-sr" aria-live="polite"></p></div>`;
 intro.after(track);
