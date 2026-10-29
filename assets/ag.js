@@ -76,21 +76,26 @@ function cardIn(im){ if(rm){ im.animate([{opacity:0},{opacity:1}],{duration:200,
   im.animate([{opacity:0,transform:'translateY(10px) scale(.98)'},{opacity:1,transform:'none'}],{duration:480,easing:EASE,fill:'both'}); }
 function cardOut(im){ im.getAnimations().forEach(a=>a.cancel());
   im.animate([{opacity:1,transform:'none'},{opacity:0,transform:rm?'none':'translateY(6px) scale(.98)'}],{duration:220,easing:'cubic-bezier(0.4, 0, 1, 1)',fill:'forwards'}).onfinish=()=>im.remove(); }
-function cardImg(id){ const M_=META[id], im=new Image(); im.className='ag-card'; im.alt=''; im.decoding='async'; im.src=SRC(id);
+/* a card keeps its storyboard size, but never gets wider than the content column: the column takes the card's width
+   (or the column's, if that is narrower) and the picture is scaled to it */
+function cardFit(side, id){ const M_=META[id], col=capCols[side];
+  const side0=16, avail=TWO ? (mfoot.clientWidth-2*side0-16)/2 : mfoot.clientWidth-2*side0;   /* 16px page gutter on each side */
+  const k=Math.min(1, avail/M_.w); col.style.width=(M_.w*k)+'px'; return k; }
+function cardImg(id, k){ const M_=META[id], im=new Image(); im.className='ag-card'; im.alt=''; im.decoding='async'; im.src=SRC(id);
   /* the export carries a margin for the shadow: place the card box at 0,0 and let the margin hang out */
-  Object.assign(im.style,{left:-M_.pad+'px', top:-M_.pad+'px', width:(M_.w+2*M_.pad)+'px'}); return im; }
+  Object.assign(im.style,{left:(-M_.pad*k)+'px', top:(-M_.pad*k)+'px', width:((M_.w+2*M_.pad)*k)+'px'}); return im; }
 function capPut(side, c){
   const cur=capNow[side];
   if(c && cur && cur.title===c[5]){ /* same hint, newer picture */
-    if(cur.id!==c[0]){ const im=cardImg(c[0]); capCols[side].appendChild(im);
+    if(cur.id!==c[0]){ const k=cardFit(side,c[0]), im=cardImg(c[0],k); capCols[side].appendChild(im);
       im.animate([{opacity:0},{opacity:1}],{duration:260,easing:'ease',fill:'both'});
       const old=cur.img; old.animate([{opacity:1},{opacity:0}],{duration:260,easing:'ease',fill:'forwards'}).onfinish=()=>old.remove();
-      cur.img=im; cur.id=c[0]; cur.h=META[c[0]].h; footFit(); }
+      cur.img=im; cur.id=c[0]; cur.h=META[c[0]].h*k; footFit(); }
     return; }
   if(cur){ cardOut(cur.img); capNow[side]=null; }
   if(!c) return;
-  const im=cardImg(c[0]); capCols[side].appendChild(im); cardIn(im);
-  capNow[side]={title:c[5], id:c[0], img:im, h:META[c[0]].h}; footFit();
+  const k=cardFit(side,c[0]), im=cardImg(c[0],k); capCols[side].appendChild(im); cardIn(im);
+  capNow[side]={title:c[5], id:c[0], img:im, h:META[c[0]].h*k}; footFit();
 }
 function capClear(){ capPut('l',null); capPut('r',null); }
 let footH=154;
@@ -263,7 +268,7 @@ function introFit(){
   const pt=parseFloat(getComputedStyle(intro).paddingTop)||0;
   const fin=sec.classList.contains('is-dl'), alt=copies.find(c=>c!==copyDef);
   let h=((fin&&alt)?alt:copyDef).getBoundingClientRect().height;
-  if(tcopy && !fin) h+=tcopy.getBoundingClientRect().height + (parseFloat(getComputedStyle(tcopy).marginTop)||0);
+  if(tcopy && !fin && tcopy.offsetParent) h+=tcopy.getBoundingClientRect().height + (parseFloat(getComputedStyle(tcopy).marginTop)||0);
   sec.style.setProperty('--intro-h', (pt+h)+'px'); }
 
 /* ---------- playing ---------- */

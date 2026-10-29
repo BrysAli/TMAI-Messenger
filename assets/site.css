@@ -589,3 +589,13 @@ a{color:inherit}
 .ag-grid-white{opacity:0}
 .ag.is-dl .ag-grid{opacity:0}
 .ag.is-dl .ag-grid.ag-grid-white{opacity:1}
+
+/* phones: no per-story copy under the block title, the block reads like the first page (title, text, phone) */
+.ag.m .ag-tcopy{display:none}
+/* phones: the header switch is icons only, the same width and height as the Download button next to it */
+@media (max-width:600px){
+  .pswitch{padding:3px}
+  .pswitch a,.pswitch a[aria-current="page"]{width:44px;padding:0;justify-content:center}
+  .pswitch .lb,.pswitch a[aria-current="page"] .lb{display:none}
+  .nav .btn.btn-pri{width:98px;height:44px;padding:0}
+}
